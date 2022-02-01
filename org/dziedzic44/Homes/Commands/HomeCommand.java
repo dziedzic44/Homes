@@ -27,11 +27,11 @@ public class HomeCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             return false;
         } if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
-            Location playerLocation = ((Player) sender).getLocation();
             addEffects(((Player) sender));
             BukkitTask task =  new BukkitRunnable() {
                 int ticks = 0;
                 int timeLeft = plugin.getConfig().getInt("warp.delay");
+                Location playerLocation = ((Player) sender).getLocation();
                 @Override
                 public void run() {
                     if (((plugin.getConfig().getInt("warp.delay") * 20) - ticks) / 20 == timeLeft -1) {
