@@ -1,0 +1,16 @@
+name: Homes
+main: org.dziedzic44.Homes.Main
+author: dziedzic44
+version: 1.0
+database: false
+
+commands:
+  delhome:
+    usage: /delhome
+    description: Deletes home.
+  home:
+    usage: /home
+    description: Teleports to home.
+  sethome:
+    usage: /sethome
+    description: Sets home.
