@@ -28,11 +28,10 @@ public class HomeCommand implements CommandExecutor {
             return false;
         } if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
             addEffects(((Player) sender));
-            BukkitTask task =  new BukkitRunnable() {
+            BukkitTask task = new BukkitRunnable() {
                 int ticks = 0;
                 int timeLeft = plugin.getConfig().getInt("warp.delay");
                 Location playerLocation = ((Player) sender).getLocation();
-                @Override
                 public void run() {
                     if (((plugin.getConfig().getInt("warp.delay") * 20) - ticks) / 20 == timeLeft -1) {
                         ((Player) sender).sendTitle(ChatColor.GREEN + plugin.getConfig().getString("messages.warp.title"), plugin.getConfig().getString("messages.warp.subtitle") + timeLeft, 4, 12, 4);
