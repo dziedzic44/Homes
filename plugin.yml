@@ -2,6 +2,7 @@ name: Homes
 main: org.dziedzic44.Homes.Main
 author: dziedzic44
 version: 1.0
+description: Homes is lightweight plugin which allow players to create, teleport and delete their own warp called homes.
 
 commands:
   delhome:
