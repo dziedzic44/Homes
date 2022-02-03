@@ -26,7 +26,7 @@ public class HomeCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             return false;
-        } if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
+        } else if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
             addEffects(((Player) sender));
             BukkitTask task = new BukkitRunnable() {
                 int ticks = 0;
