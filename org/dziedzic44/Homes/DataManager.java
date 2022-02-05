@@ -16,7 +16,7 @@ public class DataManager {
     }
 
     public FileConfiguration getConfig() {
-        return dataConfig;
+        return this.dataConfig;
     }
 
     public void saveConfig() {
