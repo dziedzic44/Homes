@@ -42,7 +42,7 @@ public class HomeCommand implements CommandExecutor {
                         if (plugin.getConfig().getBoolean("warp.options.sound")) ((Player) sender).playSound(((Player) sender).getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 10, 1);
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.success")));
                         this.cancel();
-                    } else if ((playerLocation.getBlockX() != ((Player) sender).getLocation().getBlockX() || playerLocation.getBlockY() != ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() != ((Player) sender).getLocation().getBlockZ()) && ticks != plugin.getConfig().getInt("warp.options.delay") * 20) {
+                    } else if ((playerLocation.getBlockX() != ((Player) sender).getLocation().getBlockX() || playerLocation.getBlockY() != ((Player) sender).getLocation().getBlockY() || playerLocation.getBlockZ() != ((Player) sender).getLocation().getBlockZ()) && ticks != plugin.getConfig().getInt("warp.options.delay") * 20) {
                         ((Player) sender).resetTitle();
                         for (PotionEffect effect : ((Player) sender).getActivePotionEffects()) ((Player) sender).removePotionEffect(effect.getType());
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.cancel")));
