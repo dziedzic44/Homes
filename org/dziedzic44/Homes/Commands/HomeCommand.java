@@ -27,53 +27,33 @@ public class HomeCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             return false;
         } else if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
-            addEffects(((Player) sender));
+            if (plugin.getConfig().getBoolean("warp.options.confusion")) ((Player) sender).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 0));
             BukkitTask task = new BukkitRunnable() {
                 int ticks = 0;
-                int timeLeft = plugin.getConfig().getInt("warp.delay");
+                int timeLeft = plugin.getConfig().getInt("warp.options.delay");
                 Location playerLocation = ((Player) sender).getLocation();
                 public void run() {
-                    if (((plugin.getConfig().getInt("warp.delay") * 20) - ticks) / 20 == timeLeft -1) {
-                        ((Player) sender).sendTitle(ChatColor.GREEN + plugin.getConfig().getString("messages.warp.title"), plugin.getConfig().getString("messages.warp.subtitle") + timeLeft, 4, 12, 4);
+                    if (((plugin.getConfig().getInt("warp.options.delay") * 20) - ticks) / 20 == timeLeft -1) {
+                        ((Player) sender).sendTitle(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.title")), ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.subtitle")) + timeLeft, 4, 12, 4);
                         timeLeft--;
-                    } if (playerLocation.getBlockX() == ((Player) sender).getLocation().getBlockX() && playerLocation.getBlockY() == ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() == ((Player) sender).getLocation().getBlockZ() && ticks == plugin.getConfig().getInt("warp.delay") * 20) {
-                        playSound(((Player) sender));
-                        removeEffects(((Player) sender));
-                        sender.sendMessage(ChatColor.GREEN + plugin.getConfig().getString("messages.warp.success"));
+                    } if (playerLocation.getBlockX() == ((Player) sender).getLocation().getBlockX() && playerLocation.getBlockY() == ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() == ((Player) sender).getLocation().getBlockZ() && ticks == plugin.getConfig().getInt("warp.options.delay") * 20) {
                         ((Player) sender).teleport(dataManager.getConfig().getLocation(((Player) sender).getUniqueId().toString()));
+                        for (PotionEffect effect : ((Player) sender).getActivePotionEffects()) ((Player) sender).removePotionEffect(effect.getType());
+                        if (plugin.getConfig().getBoolean("warp.options.sound")) ((Player) sender).playSound(((Player) sender).getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 10, 1);
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.success")));
                         this.cancel();
-                    } else if ((playerLocation.getBlockX() != ((Player) sender).getLocation().getBlockX() || playerLocation.getBlockY() != ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() != ((Player) sender).getLocation().getBlockZ()) && ticks != plugin.getConfig().getInt("warp.delay") * 20) {
+                    } else if ((playerLocation.getBlockX() != ((Player) sender).getLocation().getBlockX() || playerLocation.getBlockY() != ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() != ((Player) sender).getLocation().getBlockZ()) && ticks != plugin.getConfig().getInt("warp.options.delay") * 20) {
                         ((Player) sender).resetTitle();
-                        removeEffects(((Player) sender));
-                        sender.sendMessage(ChatColor.YELLOW + plugin.getConfig().getString("messages.warp.cancel"));
+                        for (PotionEffect effect : ((Player) sender).getActivePotionEffects()) ((Player) sender).removePotionEffect(effect.getType());
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.cancel")));
                         this.cancel();
                     }
                     ticks++;
                 }
             }.runTaskTimer(plugin, 0, 1);
         } else {
-            sender.sendMessage(ChatColor.YELLOW + plugin.getConfig().getString("messages.warp.fail"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("warp.messages.fail")));
         }
         return true;
-    }
-
-    public void playSound(Player selectedPlayer) {
-        if (plugin.getConfig().getBoolean("warp.sound")) {
-            selectedPlayer.playSound(selectedPlayer.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 10, 1);
-        }
-    }
-
-    public void addEffects(Player selectedPlayer) {
-        if (plugin.getConfig().getBoolean("warp.effects")) {
-            selectedPlayer.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 0));
-            selectedPlayer.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
-        }
-    }
-
-    public void removeEffects(Player selectedPlayer) {
-        if (plugin.getConfig().getBoolean("warp.effects")) {
-            selectedPlayer.removePotionEffect(PotionEffectType.CONFUSION);
-            selectedPlayer.removePotionEffect(PotionEffectType.BLINDNESS);
-        }
     }
 }
