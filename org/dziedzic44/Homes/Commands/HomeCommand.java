@@ -28,7 +28,6 @@ public class HomeCommand implements CommandExecutor {
             return false;
         } else if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
             if (plugin.getConfig().getBoolean("warp.options.confusion")) ((Player) sender).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 0));
-            if (plugin.getConfig().getBoolean("warp.options.blindness")) ((Player) sender).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
             BukkitTask task = new BukkitRunnable() {
                 int ticks = 0;
                 int timeLeft = plugin.getConfig().getInt("warp.options.delay");
