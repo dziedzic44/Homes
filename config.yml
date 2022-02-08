@@ -1,14 +1,9 @@
-delete:
+delhome:
   messages:
     success: "&aHome has been successfully removed."
     fail: "&eYou don't have home."
     
-set:
-  messages:
-    success: "&aHome has been set to your location."
-    fail: "&eYou already have home."
-
-teleport:
+home:
   messages:
     title: "&aTeleportation"
     subtitle: "&fTime left: "
@@ -19,3 +14,8 @@ teleport:
     delay: 5
     sound: true
     confusion: true
+    
+sethome:
+  messages:
+    success: "&aHome has been set to your location."
+    fail: "&eYou already have home."
