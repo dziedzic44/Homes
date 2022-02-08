@@ -22,10 +22,10 @@ public class SethomeCommand implements CommandExecutor {
             return false;
         } else if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) == null) {
             dataManager.getConfig().set(((Player) sender).getUniqueId().toString(), ((Player) sender).getLocation());
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("set.messages.success")));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("sethome.messages.success")));
             dataManager.saveConfig();
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("set.messages.fail")));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("sethome.messages.fail")));
         }
         return true;
     }
