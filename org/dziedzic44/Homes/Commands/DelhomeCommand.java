@@ -22,10 +22,10 @@ public class DelhomeCommand implements CommandExecutor {
             return false;
         } else if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
             dataManager.getConfig().set(((Player) sender).getUniqueId().toString(), null);
-            sender.sendMessage(ChatColor.GREEN + plugin.getConfig().getString("messages.delete.success"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("delete.messages.success")));
             dataManager.saveConfig();
         } else {
-            sender.sendMessage(ChatColor.YELLOW + plugin.getConfig().getString("messages.delete.fail"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("delete.messages.fail")));
         }
         return true;
     }
