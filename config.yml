@@ -1,18 +1,21 @@
-warp:
-  sound: true
-  effects: true
-  delay: 5
+delete:
+  messages:
+    success: "&aHome has been successfully removed."
+    fail: "&eYou don't have home."
 
-messages:
-  delete:
-    success: "Home has been successfully removed."
-    fail: "You don't have home."
-  set:
-    success: "Home has been set to your location."
-    fail: "You already have home."
-  warp:
-    title: "Teleportation"
-    subtitle: "Time left: "
-    success: "You have been teleported successfully."
-    fail: "You don't have home."
-    cancel: "You moved, teleportation cancelled!"
+warp:
+  messages:
+    title: "&aTeleportation"
+    subtitle: "&fTime left: "
+    success: "&aYou have been teleported successfully."
+    cancel: "&eYou moved, teleportation cancelled!"
+    fail: "&eYou don't have home."
+  options:
+    delay: 5
+    sound: true
+    confusion: true
+
+set:
+  messages:
+    success: "&aHome has been set to your location."
+    fail: "&eYou already have home."
