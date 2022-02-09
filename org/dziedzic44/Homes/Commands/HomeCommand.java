@@ -38,13 +38,13 @@ public class HomeCommand implements CommandExecutor {
                         timeLeft--;
                     } if (playerLocation.getBlockX() == ((Player) sender).getLocation().getBlockX() && playerLocation.getBlockY() == ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() == ((Player) sender).getLocation().getBlockZ() && ticks == plugin.getConfig().getInt("home.options.delay") * 20) {
                         ((Player) sender).teleport(dataManager.getConfig().getLocation(((Player) sender).getUniqueId().toString()));
-                        for (PotionEffect effect : ((Player) sender).getActivePotionEffects()) ((Player) sender).removePotionEffect(effect.getType());
+                        if (plugin.getConfig().getBoolean("home.options.confusion")) ((Player) sender).removePotionEffect(PotionEffectType.CONFUSION);
                         if (plugin.getConfig().getBoolean("home.options.sound")) ((Player) sender).playSound(((Player) sender).getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 10, 1);
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.success")));
                         this.cancel();
                     } else if ((playerLocation.getBlockX() != ((Player) sender).getLocation().getBlockX() || playerLocation.getBlockY() != ((Player) sender).getLocation().getBlockY() || playerLocation.getBlockZ() != ((Player) sender).getLocation().getBlockZ()) && ticks != plugin.getConfig().getInt("home.options.delay") * 20) {
                         ((Player) sender).resetTitle();
-                        for (PotionEffect effect : ((Player) sender).getActivePotionEffects()) ((Player) sender).removePotionEffect(effect.getType());
+                        if (plugin.getConfig().getBoolean("home.options.confusion")) ((Player) sender).removePotionEffect(PotionEffectType.CONFUSION);
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.cancel")));
                         this.cancel();
                     }
