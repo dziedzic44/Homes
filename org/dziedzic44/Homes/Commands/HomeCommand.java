@@ -34,7 +34,7 @@ public class HomeCommand implements CommandExecutor {
                 Location playerLocation = ((Player) sender).getLocation();
                 public void run() {
                     if (((plugin.getConfig().getInt("home.options.delay") * 20) - ticks) / 20 == timeLeft -1) {
-                        ((Player) sender).sendTitle(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.title")), ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.subtitle")) + timeLeft, 4, 12, 4);
+                        ((Player) sender).sendTitle(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.title")), ChatColor.translateAlternateColorCodes('&', String.format(plugin.getConfig().getString("home.messages.subtitle"), timeLeft)), 4, 12, 4);
                         timeLeft--;
                     } if (playerLocation.getBlockX() == ((Player) sender).getLocation().getBlockX() && playerLocation.getBlockY() == ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() == ((Player) sender).getLocation().getBlockZ() && ticks == plugin.getConfig().getInt("home.options.delay") * 20) {
                         ((Player) sender).teleport(dataManager.getConfig().getLocation(((Player) sender).getUniqueId().toString()));
