@@ -2,7 +2,7 @@ delhome:
   messages:
     success: "&aHome has been successfully removed."
     fail: "&eYou don't have home."
-    
+
 home:
   messages:
     title: "&aTeleportation"
@@ -13,8 +13,8 @@ home:
   options:
     delay: 5
     sound: true
-    confusion: true
-    
+    effect: true
+
 sethome:
   messages:
     success: "&aHome has been set to your location."
