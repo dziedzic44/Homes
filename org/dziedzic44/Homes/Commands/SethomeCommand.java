@@ -1,12 +1,12 @@
 package org.dziedzic44.Homes.Commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.dziedzic44.Homes.Main;
 import org.bukkit.command.Command;
-import org.dziedzic44.Homes.DataManager;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.dziedzic44.Homes.DataManager;
+import org.dziedzic44.Homes.Main;
 
 public class SethomeCommand implements CommandExecutor {
     public Main plugin;
