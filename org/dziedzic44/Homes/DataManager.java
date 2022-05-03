@@ -1,8 +1,8 @@
 package org.dziedzic44.Homes;
 
-import java.io.File;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import java.io.File;
 
 public class DataManager {
     private Main plugin;
