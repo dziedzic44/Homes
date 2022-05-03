@@ -6,7 +6,7 @@ delhome:
 home:
   messages:
     title: "&aTeleportation"
-    subtitle: "&fTime left: "
+    subtitle: "&fTime left: %d"
     success: "&aYou have been teleported successfully."
     cancel: "&eYou moved, teleportation cancelled!"
     fail: "&eYou don't have home."
