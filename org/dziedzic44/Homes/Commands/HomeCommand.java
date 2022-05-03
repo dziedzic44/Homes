@@ -1,18 +1,18 @@
 package org.dziedzic44.Homes.Commands;
 
-import org.bukkit.Sound;
-import org.bukkit.Location;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.dziedzic44.Homes.Main;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.dziedzic44.Homes.DataManager;
-import org.bukkit.command.CommandSender;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.dziedzic44.Homes.Main;
 
 public class HomeCommand implements CommandExecutor {
     public Main plugin;
@@ -27,7 +27,7 @@ public class HomeCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             return false;
         } else if (dataManager.getConfig().getString(((Player) sender).getUniqueId().toString()) != null) {
-            if (plugin.getConfig().getBoolean("home.options.confusion")) ((Player) sender).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 0));
+            if (plugin.getConfig().getBoolean("home.options.effect")) ((Player) sender).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 0));
             BukkitTask task = new BukkitRunnable() {
                 int ticks = 0;
                 int timeLeft = plugin.getConfig().getInt("home.options.delay");
@@ -38,13 +38,13 @@ public class HomeCommand implements CommandExecutor {
                         timeLeft--;
                     } if (playerLocation.getBlockX() == ((Player) sender).getLocation().getBlockX() && playerLocation.getBlockY() == ((Player) sender).getLocation().getBlockY() && playerLocation.getBlockZ() == ((Player) sender).getLocation().getBlockZ() && ticks == plugin.getConfig().getInt("home.options.delay") * 20) {
                         ((Player) sender).teleport(dataManager.getConfig().getLocation(((Player) sender).getUniqueId().toString()));
-                        if (plugin.getConfig().getBoolean("home.options.confusion")) ((Player) sender).removePotionEffect(PotionEffectType.CONFUSION);
+                        if (plugin.getConfig().getBoolean("home.options.effect")) ((Player) sender).removePotionEffect(PotionEffectType.CONFUSION);
                         if (plugin.getConfig().getBoolean("home.options.sound")) ((Player) sender).playSound(((Player) sender).getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 10, 1);
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.success")));
                         this.cancel();
                     } else if ((playerLocation.getBlockX() != ((Player) sender).getLocation().getBlockX() || playerLocation.getBlockY() != ((Player) sender).getLocation().getBlockY() || playerLocation.getBlockZ() != ((Player) sender).getLocation().getBlockZ()) && ticks != plugin.getConfig().getInt("home.options.delay") * 20) {
                         ((Player) sender).resetTitle();
-                        if (plugin.getConfig().getBoolean("home.options.confusion")) ((Player) sender).removePotionEffect(PotionEffectType.CONFUSION);
+                        if (plugin.getConfig().getBoolean("home.options.effect")) ((Player) sender).removePotionEffect(PotionEffectType.CONFUSION);
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("home.messages.cancel")));
                         this.cancel();
                     }
